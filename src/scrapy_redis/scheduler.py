@@ -3,6 +3,7 @@ import importlib
 from scrapy.utils.misc import load_object
 
 from . import connection, defaults
+from loguru import logger
 
 
 # TODO: add SCRAPY_JOB support.
@@ -152,7 +153,7 @@ class Scheduler:
             self.flush()
         # notice if there are requests already in the queue to resume the crawl
         if len(self.queue):
-            spider.log(f"Resuming crawl ({len(self.queue)} requests scheduled)")
+            logger.info(f"Resuming crawl ({len(self.queue)} requests scheduled)")
 
     def close(self, reason):
         if not self.persist:
